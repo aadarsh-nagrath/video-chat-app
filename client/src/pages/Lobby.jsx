@@ -1,22 +1,37 @@
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useEffect} from "react";
 // will use callback for form submission
-
+import {useSocket} from "../context/socketProvider";
+import "./Lobby.css";
 const LobbyScreen = ()=> {
 
     const [email, setEmail] = useState('');
     const [room, setRoom] = useState('');
 
+    const socket = useSocket('');
+
+    console.log(socket);
+
     const handleSubmit = useCallback((e)=>{
         e.preventDefault();
-        console.log({
-            email,
-            room
-        });
+        socket.emit('room:join', {email, room});
+
+    }, [email, room, socket])
+
+    const handleJoinRoom = useCallback((data)=>{
+        const {email, room} = data;
+        console.log(email,room);
     }, [])
+
+    useEffect(()=>{
+        socket.on('room:join', handleJoinRoom);
+        return () => (
+            socket.off('room:join', handleJoinRoom)
+        );
+    }, [socket, handleJoinRoom]);
 
     return(
         <div>
-            <h1>Lobby Screen</h1>
+            <h1>LOBBY</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email-Id: </label>
                 <input type="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} />

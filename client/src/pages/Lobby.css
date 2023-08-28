@@ -1,0 +1,92 @@
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styling for the main content container */
+  div {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative; /* Required for the shadow effect */
+  }
+  
+  /* Rainbow color shadow effect for the form */
+  div:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(
+      45deg,
+      #ff6c37,
+      #ff9f37,
+      #f6e72e,
+      #66d970,
+      #4ca7fd,
+      #a46eff
+    );
+    z-index: -1;
+    filter: blur(20px);
+    opacity: 0.6;
+  }
+  
+  /* Styling for the form */
+  form {
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Required for the stacking context */
+    z-index: 1; /* Ensure the form is above the shadow */
+  }
+  
+  /* Styling for labels */
+  label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #58a6ff; /* Blue color */
+    font-size: 16px; /* Adjust font size */
+  }
+  
+  /* Styling for heading */
+  h1 {
+    color: #fdf9f8; /* Orange color */
+    font-size: 24px; /* Adjust font size */
+  }
+  
+  /* Styling for inputs */
+  input {
+    padding: 8px;
+    border: 1px solid #30363d;
+    border-radius: 3px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    margin-bottom: 12px;
+  }
+  
+  /* Styling for the button */
+  button {
+    padding: 10px 16px;
+    background-color: #28a745; /* Green color */
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  /* Hover effect for the button */
+  button:hover {
+    background-color: #23923d;
+  }
+  
+  /* Center the button within the form */
+  button {
+    align-self: center;
+  }
