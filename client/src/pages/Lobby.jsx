@@ -2,25 +2,30 @@ import React, {useState, useCallback, useEffect} from "react";
 // will use callback for form submission
 import {useSocket} from "../context/socketProvider";
 import "./Lobby.css";
+import { useNavigate } from "react-router-dom";
+//navigate will help to naviagate the page when needed
+
 const LobbyScreen = ()=> {
 
     const [email, setEmail] = useState('');
     const [room, setRoom] = useState('');
 
     const socket = useSocket('');
+    const navigate = useNavigate();
 
-    console.log(socket);
+    // console.log(socket);
 
     const handleSubmit = useCallback((e)=>{
         e.preventDefault();
         socket.emit('room:join', {email, room});
 
-    }, [email, room, socket])
+    }, [email, room, socket]);
 
     const handleJoinRoom = useCallback((data)=>{
-        const {email, room} = data;
-        console.log(email,room);
-    }, [])
+        const {room} = data;
+        navigate(`/room/${room}`);
+    }, [navigate]);
+    //the handleJoinRoom function is invoked as a result of an event received from the socket connection.
 
     useEffect(()=>{
         socket.on('room:join', handleJoinRoom);

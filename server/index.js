@@ -16,7 +16,13 @@ io.on('connection',socket=>{
         const {email, room} = data;
         emailToSocketIdMap.set(email, socket.id);
         socketidToEmailMap.set(socket.id, email);
-        io.to(socket.id).emit('room:join', data); //returning data at that event
+        try {
+            
+            io.to(room).emit("user:joined", { email, id: socket.id }); // will notify that a user is joined and will show its email and socket.id
+            socket.join(room); // joining user into room
+        } catch (error) {
+            console.log('notification not working');
+        }
+        io.to(socket.id).emit('room:join', data); //returning data at that event and pushing user into room
     });
 });
-
