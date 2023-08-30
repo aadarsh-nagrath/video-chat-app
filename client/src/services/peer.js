@@ -1,7 +1,7 @@
 // Sir ke uper se jaane wala code
 //calling through Peer
 class PeerService {
-    construction() {
+    constructor() {
         if(!this.peer) {
             this.peer = new RTCPeerConnection({ // already build in
                 iceServers: [
@@ -18,9 +18,9 @@ class PeerService {
 
     async getAnswer(offer){
         if(this.peer){
-            await this.peer.setRemoteDescription(offer)
-            const ans = await this.peer.createAnswer()
-            await this.peer.setLocalDescription(new  RTCSessionDescription(ans));
+            await this.peer.setRemoteDescription(offer);
+            const ans = await this.peer.createAnswer();
+            await this.peer.setLocalDescription(new RTCSessionDescription(ans));
             return ans;
         }
     };
@@ -33,7 +33,7 @@ class PeerService {
 
     async getOffer() {
         if(this.peer){
-            const offer = await this.peer.createOffer()
+            const offer = await this.peer.createOffer();
             await this.peer.setLocalDescription(new  RTCSessionDescription(offer));
             return offer;
         }
